@@ -1,4 +1,4 @@
-## Defending against Distributed Model Poisoning Attacks with Few Clean Examples
+## LearnDefend: Learning to Defend against Distributed Model Poisoning Attacks using Few clean Examples
 
 ### Overview
 ---
