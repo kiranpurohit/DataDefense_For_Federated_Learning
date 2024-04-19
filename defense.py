@@ -118,7 +118,7 @@ class AddNoise(Defense):
         return None
 
 #####################################################################################################
-class LearningDefense(Defense):
+class DataDefense(Defense):
     def __init__(self, *args, **kwargs):
         pass
     def exec(self, client_models, global_model, num_dps, net_portion, poisoned_train_loader_flag, device, *args, **kwargs):
