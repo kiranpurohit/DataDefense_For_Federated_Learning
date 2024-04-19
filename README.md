@@ -1,8 +1,4 @@
-## LearnDefend: Learning to Defend against Targeted Model-Poisoning Attacks on Federated Learning
-
-### Overview
----
-Due to its decentralized nature, Federated Learning (FL) lends itself to adversarial attacks in the form of backdoors during training. The goal of a backdoor is to corrupt the performance of the trained model on specific sub-tasks (e.g., by classifying green cars as frogs). A range of FL backdoor attacks have been introduced in the literature, but also methods to defend against them, and it is currently an open question whether FL systems can be tailored to be robust against backdoors. In this work, we used a new family of backdoor attacks, which are referred as edge-case backdoors. An edge-case backdoor forces a model to misclasify on seemingly easy inputs that are however unlikely to be part of the training, or test data, i.e., they live on the tail of the input distribution. We also used trigger patch attack where a small, and inconspicuous looking trigger patch is inserted to the image to misclassify it. Our method Learning-Defense is a successful defense against several attacks where the current defense techniques fail.
+## DataDefense: Mitigating Model Poisoning Attacks in Federated Learning
 
 ### Depdendencies (tentative)
 ---
@@ -52,7 +48,7 @@ The main script is `./simulated_averaging.py`, to launch the jobs, we provide a 
 
 
 #### Sample command
-PGD Attack on Southwest Airline exmaple over CIFAR-10 dataset where there is learning-defense on the data center. The attacker participate in the fixed-frequency manner.
+PGD Attack on Southwest Airline exmaple over CIFAR-10 dataset where there is defense on the data center. The attacker participate in the fixed-frequency manner.
 ```
 python simulated_averaging.py \
 --lr 0.001 \
@@ -66,7 +62,7 @@ python simulated_averaging.py \
 --model vgg9 \
 --fl_mode fixed-freq \
 --attacker_pool_size 10 \
---defense_method learning-defense \
+--defense_method data-defense \
 --attack_method pgd \
 --attack_case edge-case \
 --model_replacement False \
@@ -80,7 +76,7 @@ python simulated_averaging.py \
 --device=cuda
 ```
 
-PGD Attack on Trigger Patch exmaple over CIFAR-10 dataset where there is learning-defense on the data center. The attacker participate in the fixed-frequency manner.
+PGD Attack on Trigger Patch exmaple over CIFAR-10 dataset where there is defense on the data center. The attacker participate in the fixed-frequency manner.
 ```
 python simulated_averaging.py \
 --lr 0.001 \
@@ -94,7 +90,7 @@ python simulated_averaging.py \
 --model vgg9 \
 --fl_mode fixed-freq \
 --attacker_pool_size 10 \
---defense_method learning-defense \
+--defense_method data-defense \
 --attack_method pgd \
 --attack_case edge-case \
 --model_replacement False \
