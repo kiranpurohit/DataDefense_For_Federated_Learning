@@ -438,8 +438,8 @@ class FrequencyFederatedLearningTrainer(FederatedLearningTrainer):
             # doesn't really add noise. just clips
             self._defender = WeightDiffClippingDefense(norm_bound=arguments['norm_bound'])
         ############################################################
-        elif arguments["defense_technique"] == "learning-defense":
-            self._defender = LearningDefense()
+        elif arguments["defense_technique"] == "data-defense":
+            self._defender = DataDefense()
         ############################################################
         elif arguments["defense_technique"] == "krum":
             self._defender = Krum(mode='krum', num_workers=self.part_nets_per_round, num_adv=1)
@@ -711,7 +711,7 @@ class FrequencyFederatedLearningTrainer(FederatedLearningTrainer):
             # after all 10 workers execution in a fl round, then defense will take place
             ##############################################################################
 
-            if self.defense_technique == "learning-defense":
+            if self.defense_technique == "data-defense":
 
                 if (flr % 300) == 1:
                     self.gamma_lr = self.gamma_lr*0.1
@@ -1147,7 +1147,7 @@ class FrequencyFederatedLearningTrainer(FederatedLearningTrainer):
                     self._defender.exec(client_model=net,
                                         global_model=self.net_avg,)
             ###########################################################################
-            elif self.defense_technique == "learning-defense":
+            elif self.defense_technique == "data-defense":
                 net_freq = self._defender.exec(client_models=net_list, 
                                                         global_model=self.net_avg,
                                                         num_dps=[self.num_dps_poisoned_dataset]+num_data_points,
@@ -1182,11 +1182,11 @@ class FrequencyFederatedLearningTrainer(FederatedLearningTrainer):
             # net list has the updated (10 net) trained on 10 client's sampled images
             # net freq of len 10 is the ratio of # client's images to the total number of images in that round
 
-            if self.defense_technique != "learning-defense":
+            if self.defense_technique != "data-defense":
                 self.net_avg = fed_avg_aggregator(net_list, net_freq, device=self.device, model=self.model)
 
 
-            if self.defense_technique == "learning-defense":
+            if self.defense_technique == "data-defense":
 
                 paramNettest = {} #dictionary of parameters for Net_test
                 for name, param in net_list[0].named_parameters():
@@ -1463,12 +1463,12 @@ class FrequencyFederatedLearningTrainer(FederatedLearningTrainer):
             backdoor_task_acc.append(backdoor_acc)
 
             ###############################################################
-            if self.defense_technique == "learning-defense":
+            if self.defense_technique == "data-defense":
                 freq_clients = net_freq.tolist()
                 freq_list.append(freq_clients)
 
 
-            if self.defense_technique == "learning-defense":
+            if self.defense_technique == "data-defense":
                 df2 = pd.DataFrame({'freq_list': freq_list}) 
                 freq_filename = "freq_assigned.csv"
                 df2.to_csv(freq_filename, index=False)
@@ -1495,7 +1495,7 @@ class FrequencyFederatedLearningTrainer(FederatedLearningTrainer):
             logger.info("Wrote accuracy results to: {}".format(results_filename))
 
 
-            if self.defense_technique == "learning-defense":
+            if self.defense_technique == "data-defense":
 
                 folder1 = f"./loss_learning"
                 np.savez(f'{folder1}', loss_total = self.loss_total, loss_clean = self.loss_clean, loss_poison = self.loss_poison)
@@ -1623,7 +1623,7 @@ class FixedPoolFederatedLearningTrainer(FederatedLearningTrainer):
             # doesn't really add noise. just clips
             self._defender = WeightDiffClippingDefense(norm_bound=arguments['norm_bound'])
         ############################################################
-        elif arguments["defense_technique"] == "learning-defense":
+        elif arguments["defense_technique"] == "data-defense":
             self._defender = LearningDefense()
         ############################################################
         elif arguments["defense_technique"] == "krum":
@@ -2237,7 +2237,7 @@ class FixedPoolFederatedLearningTrainer(FederatedLearningTrainer):
                     self._defender.exec(client_model=net,
                                         global_model=self.net_avg,)
             ###########################################################################
-            elif self.defense_technique == "learning-defense":
+            elif self.defense_technique == "data-defense":
                 net_freq = self._defender.exec(client_models=net_list, 
                                                         global_model=self.net_avg,
                                                         num_dps=[self.num_dps_poisoned_dataset]+num_data_points,
@@ -2272,11 +2272,11 @@ class FixedPoolFederatedLearningTrainer(FederatedLearningTrainer):
             # net list has the updated (10 net) trained on 10 client's sampled images
             # net freq of len 10 is the ratio of # client's images to the total number of images in that round
 
-            if self.defense_technique != "learning-defense":
+            if self.defense_technique != "data-defense":
                 self.net_avg = fed_avg_aggregator(net_list, net_freq, device=self.device, model=self.model)
 
 
-            if self.defense_technique == "learning-defense":
+            if self.defense_technique == "data-defense":
 
                 paramNettest = {} #dictionary of parameters for Net_test
                 for name, param in net_list[0].named_parameters():
@@ -2557,12 +2557,12 @@ class FixedPoolFederatedLearningTrainer(FederatedLearningTrainer):
                 adv_norm_diff_list.append(1.0*sum(current_adv_norm_diff_list)/len(current_adv_norm_diff_list))
 
             ###############################################################
-            if self.defense_technique == "learning-defense":
+            if self.defense_technique == "data-defense":
                 freq_clients = net_freq.tolist()
                 freq_list.append(freq_clients)
 
 
-            if self.defense_technique == "learning-defense":
+            if self.defense_technique == "data-defense":
                 df2 = pd.DataFrame({'freq_list': freq_list}) 
                 freq_filename = "freq_assigned.csv"
                 df2.to_csv(freq_filename, index=False)
@@ -2589,7 +2589,7 @@ class FixedPoolFederatedLearningTrainer(FederatedLearningTrainer):
             logger.info("Wrote accuracy results to: {}".format(results_filename))
 
 
-            if self.defense_technique == "learning-defense":
+            if self.defense_technique == "data-defense":
 
                 folder1 = f"./loss_learning"
                 np.savez(f'{folder1}', loss_total = self.loss_total, loss_clean = self.loss_clean, loss_poison = self.loss_poison)
