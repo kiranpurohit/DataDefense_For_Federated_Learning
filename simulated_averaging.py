@@ -67,7 +67,7 @@ if __name__ == "__main__":
     parser.add_argument('--attacker_pool_size', type=int, default=100,
                         help='size of attackers in the population, used when args.fl_mode == fixed-pool only')    
     parser.add_argument('--defense_method', type=str, default="no-defense",
-                        help='defense method used: no-defense|norm-clipping|norm-clipping-adaptive|weak-dp|learning-defense|krum|multi-krum|rfa|')
+                        help='defense method used: no-defense|norm-clipping|norm-clipping-adaptive|weak-dp|data-defense|krum|multi-krum|rfa|')
     parser.add_argument('--device', type=str, default='cuda',
                         help='device to set, can take the value of: cuda or cuda:x')
     parser.add_argument('--attack_method', type=str, default="blackbox",
@@ -246,7 +246,7 @@ if __name__ == "__main__":
             "batch_size":args.batch_size,                                                    ## 32
             "test_batch_size":args.test_batch_size,                                          ## 1000
             "log_interval":args.log_interval,                                                ## 100
-            "defense_technique":args.defense_method,                                         ## no-defense,krum,multi-krum,learning-defense
+            "defense_technique":args.defense_method,                                         ## no-defense,krum,multi-krum,data-defense
             "attack_method":args.attack_method,                                              ## blackbox,pgd,replace=True
             "eps":args.eps,                                                                  ## 2
             "norm_bound":args.norm_bound,                                                    ## 2
