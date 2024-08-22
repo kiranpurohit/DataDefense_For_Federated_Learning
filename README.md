@@ -1,4 +1,5 @@
 ## A Data-Driven Defense against Edge-case Model Poisoning Attacks on Federated Learning
+This repository contains the code and data to reproduce the experiments from the paper \href{A Data-Driven Defense against Edge-case Model Poisoning Attacks on Federated Learning}{https://arxiv.org/abs/2305.02022}.
 
 ### Depdendencies (tentative)
 ---
