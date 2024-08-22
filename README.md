@@ -1,4 +1,4 @@
-## DataDefense: Mitigating Model Poisoning Attacks in Federated Learning
+## A Data-Driven Defense against Edge-case Model Poisoning Attacks on Federated Learning
 
 ### Depdendencies (tentative)
 ---
