@@ -1,5 +1,5 @@
 ## A Data-Driven Defense against Edge-case Model Poisoning Attacks on Federated Learning
-This repository contains the code and data to reproduce the experiments from the paper "A Data-Driven Defense against Edge-case Model Poisoning Attacks on Federated Learning" accepted at ECAI 2024.
+This repository contains the code and data to reproduce the experiments of the paper "A Data-Driven Defense against Edge-case Model Poisoning Attacks on Federated Learning" accepted at ECAI 2024.
 https://arxiv.org/abs/2305.02022
 
 ### Depdendencies (tentative)
